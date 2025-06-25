@@ -1,11 +1,12 @@
 // react
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 // component
 import { TableContainer } from '@/components/EmployeeCheckIn/Table/TableContainer';
 import { SearchInput } from '@/components/EmployeeCheckIn/Search_Add_Button/SearchInput';
 import { AddCheckIn } from '@/components/EmployeeCheckIn/Search_Add_Button/AddCheckIn';
 
+// Type
 export interface CheckInData {
     id: string;
     name: string;
@@ -14,7 +15,8 @@ export interface CheckInData {
 }
 
 export const EmployeeCheckin = () => {
-    const IdInitial = useRef(Date.now().toString());
+    const IdInitial = useRef<string>(Date.now().toString());
+    const [searchQuery, setSearchQuery] = useState<string>('');
     const [checkInData, setIsCheckIn] = useState<CheckInData[]>([]);
     const [formData, setFormData] = useState<CheckInData>({
         id: IdInitial.current,
@@ -23,7 +25,9 @@ export const EmployeeCheckin = () => {
         timer: '',
     });
 
-    const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleChangeInput = (
+        event: React.ChangeEvent<HTMLInputElement>,
+    ): void => {
         const { name, value } = event.target;
         setFormData((prevState) => ({
             ...prevState,
@@ -31,11 +35,23 @@ export const EmployeeCheckin = () => {
         }));
     };
 
+    const filteredUser = useMemo((): CheckInData[] => {
+        const normalizedQuery = searchQuery.toLowerCase().trim();
+        return checkInData.filter((user) => {
+            const name = user.name || '';
+            return name.toLowerCase().trim().includes(normalizedQuery);
+        });
+    }, [searchQuery, checkInData]);
+
     return (
         <div className='p-6 space-y-6 w-full max-w-6xl mx-auto'>
             {/* Search & Add Button */}
             <div className='flex flex-col md:flex-row justify-between gap-4 items-center'>
-                <SearchInput />
+                <SearchInput
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    checkInData={checkInData}
+                />
                 <AddCheckIn
                     formData={formData}
                     handleChangeInput={handleChangeInput}
@@ -44,7 +60,7 @@ export const EmployeeCheckin = () => {
             </div>
 
             {/* Table */}
-            <TableContainer checkInData={checkInData} />
+            <TableContainer checkInData={filteredUser} />
         </div>
     );
 };

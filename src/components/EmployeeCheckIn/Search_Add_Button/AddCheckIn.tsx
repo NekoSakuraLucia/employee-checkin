@@ -86,10 +86,15 @@ export const AddCheckIn = ({
 
                 <DialogFooter className='mt-4'>
                     <DialogClose asChild>
-                        <Button className='cursor-pointer' variant='outline'>ยกเลิก</Button>
+                        <Button className='cursor-pointer' variant='outline'>
+                            ยกเลิก
+                        </Button>
                     </DialogClose>
                     <DialogClose asChild>
-                        <Button className='cursor-pointer' onClick={() => handleAdd(formData)}>
+                        <Button
+                            className='cursor-pointer'
+                            onClick={() => handleAdd(formData)}
+                        >
                             บันทึก
                         </Button>
                     </DialogClose>

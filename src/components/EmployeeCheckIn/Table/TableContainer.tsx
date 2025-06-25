@@ -22,7 +22,15 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
 // Icon
-import { User, Calendar, Timer, Settings, Edit, Trash, Info } from 'lucide-react';
+import {
+    User,
+    Calendar,
+    Timer,
+    Settings,
+    Edit,
+    Trash,
+    Info,
+} from 'lucide-react';
 import type { CheckInData } from '@/components/EmployeeCheckIn/main';
 
 type TableProps = {
@@ -142,11 +150,13 @@ export const TableContainer = ({ checkInData }: TableProps) => {
                     </TableBody>
                 </Table>
             ) : (
-                <div className='flex flex-col items-center justify-center pt-5 pb-8 space-y-2'>
+                <div className='flex flex-col items-center justify-center pt-5 pb-8 space-y-2 text-center'>
                     <Info className='w-32 h-32 text-zinc-800' />
                     <p className='text-zinc-400 text-lg'>ไม่พบข้อมูล</p>
-                    <p className='text-zinc-400'>
-                        คุณยังไม่ได้เพิ่มข้อมูล กรุณาเพิ่มข้อมูลเช็คอินก่อนองค์ประกอบจึงจะแสดง
+                    <p className='text-zinc-400 text-xs sm:text-sm'>
+                        คุณยังไม่ได้เพิ่มข้อมูล
+                        กรุณาเพิ่มข้อมูลเช็คอินก่อนองค์ประกอบจึงจะแสดง หรือ
+                        ไม่พบผลลัพธ์จากการค้นหา
                     </p>
                 </div>
             )}
