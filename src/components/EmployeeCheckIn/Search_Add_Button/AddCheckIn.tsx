@@ -4,6 +4,7 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
+    DialogDescription,
     DialogFooter,
     DialogClose,
     DialogTrigger,
@@ -15,7 +16,24 @@ import { Button } from '@/components/ui/button';
 // Icon
 import { Plus } from 'lucide-react';
 
-export const AddCheckIn = () => {
+// Types
+import type { CheckInData } from '@/components/EmployeeCheckIn/main';
+
+type AddCheckInProps = {
+    formData: CheckInData;
+    setIsCheckIn: React.Dispatch<React.SetStateAction<CheckInData[]>>;
+    handleChangeInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const AddCheckIn = ({
+    formData,
+    handleChangeInput,
+    setIsCheckIn,
+}: AddCheckInProps) => {
+    const handleAdd = (data: CheckInData): void => {
+        setIsCheckIn((prev) => [...prev, data]);
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -27,28 +45,54 @@ export const AddCheckIn = () => {
             <DialogContent className='sm:max-w-md'>
                 <DialogHeader>
                     <DialogTitle>เพิ่มเช็คอินใหม่</DialogTitle>
+                    <DialogDescription>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry.
+                    </DialogDescription>
                 </DialogHeader>
 
                 <div className='space-y-4 py-2'>
                     <div className='space-y-2'>
                         <Label htmlFor='name'>ชื่อพนักงาน</Label>
-                        <Input id='name' placeholder='กรอกชื่อพนักงาน' />
+                        <Input
+                            name='name'
+                            id='name'
+                            placeholder='กรอกชื่อพนักงาน'
+                            value={formData.name}
+                            onChange={handleChangeInput}
+                        />
                     </div>
                     <div className='space-y-2'>
                         <Label htmlFor='date'>วันที่</Label>
-                        <Input id='date' type='date' />
+                        <Input
+                            name='dateAt'
+                            id='date'
+                            type='date'
+                            value={formData.dateAt}
+                            onChange={handleChangeInput}
+                        />
                     </div>
                     <div className='space-y-2'>
                         <Label htmlFor='time'>เวลา</Label>
-                        <Input id='time' type='time' />
+                        <Input
+                            name='timer'
+                            id='time'
+                            type='time'
+                            value={formData.timer}
+                            onChange={handleChangeInput}
+                        />
                     </div>
                 </div>
 
                 <DialogFooter className='mt-4'>
                     <DialogClose asChild>
-                        <Button variant='outline'>ยกเลิก</Button>
+                        <Button className='cursor-pointer' variant='outline'>ยกเลิก</Button>
                     </DialogClose>
-                    <Button type='submit'>บันทึก</Button>
+                    <DialogClose asChild>
+                        <Button className='cursor-pointer' onClick={() => handleAdd(formData)}>
+                            บันทึก
+                        </Button>
+                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
