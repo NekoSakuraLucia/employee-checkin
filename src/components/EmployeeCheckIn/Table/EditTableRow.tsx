@@ -34,7 +34,10 @@ export const EditTableRow = ({ user, onUpdate }: EditTableRowProps) => {
 
     const handleChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setEditUser((prev) => ({ ...prev, [name]: value }));
+        setEditUser((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
     };
 
     return (
@@ -79,10 +82,15 @@ export const EditTableRow = ({ user, onUpdate }: EditTableRowProps) => {
 
                 <DialogFooter className='mt-4'>
                     <DialogClose asChild>
-                        <Button className='cursor-pointer' variant='outline'>ยกเลิก</Button>
+                        <Button className='cursor-pointer' variant='outline'>
+                            ยกเลิก
+                        </Button>
                     </DialogClose>
                     <DialogClose asChild>
-                        <Button className='cursor-pointer' onClick={() => onUpdate(user.id, editUser)}>
+                        <Button
+                            className='cursor-pointer'
+                            onClick={() => onUpdate(user.name, editUser)}
+                        >
                             บันทึก
                         </Button>
                     </DialogClose>
