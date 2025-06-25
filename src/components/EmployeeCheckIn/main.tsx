@@ -43,6 +43,14 @@ export const EmployeeCheckin = () => {
         });
     }, [searchQuery, checkInData]);
 
+    const updateUser = (id: string, updatedFields: Partial<CheckInData>) => {
+        setIsCheckIn((prevUsers) =>
+            prevUsers.map((user) =>
+                user.id === id ? { ...user, ...updatedFields } : user,
+            ),
+        );
+    };
+
     return (
         <div className='p-6 space-y-6 w-full max-w-6xl mx-auto'>
             {/* Search & Add Button */}
@@ -60,7 +68,7 @@ export const EmployeeCheckin = () => {
             </div>
 
             {/* Table */}
-            <TableContainer checkInData={filteredUser} />
+            <TableContainer checkInData={filteredUser} onUpdate={updateUser} />
         </div>
     );
 };

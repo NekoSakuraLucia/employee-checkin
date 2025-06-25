@@ -1,15 +1,5 @@
 // Shadcn-ui component
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-    DialogFooter,
-    DialogClose,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-import {
     Table,
     TableBody,
     TableCell,
@@ -17,8 +7,6 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
 // Icon
@@ -27,17 +15,20 @@ import {
     Calendar,
     Timer,
     Settings,
-    Edit,
     Trash,
     Info,
 } from 'lucide-react';
 import type { CheckInData } from '@/components/EmployeeCheckIn/main';
 
+// components
+import { EditTableRow } from '@/components/EmployeeCheckIn/Table/EditTableRow';
+
 type TableProps = {
     checkInData: CheckInData[];
+    onUpdate: (id: string, updatedFields: Partial<CheckInData>) => void;
 };
 
-export const TableContainer = ({ checkInData }: TableProps) => {
+export const TableContainer = ({ checkInData, onUpdate }: TableProps) => {
     return (
         <div className='overflow-x-auto rounded-lg border'>
             {checkInData.length > 0 ? (
@@ -78,62 +69,7 @@ export const TableContainer = ({ checkInData }: TableProps) => {
                                 <TableCell>{user.timer}</TableCell>
                                 <TableCell className='text-right space-x-2'>
                                     {/* ปุ่มแก้ไข */}
-                                    <Dialog>
-                                        <DialogTrigger asChild>
-                                            <Button
-                                                variant='outline'
-                                                size='sm'
-                                                className='cursor-pointer'
-                                            >
-                                                <Edit />
-                                                แก้ไข
-                                            </Button>
-                                        </DialogTrigger>
-                                        <DialogContent className='sm:max-w-md'>
-                                            <DialogHeader>
-                                                <DialogTitle>
-                                                    แก้ไขข้อมูลเช็คอิน
-                                                </DialogTitle>
-                                                <DialogDescription>
-                                                    Lorem Ipsum is simply dummy
-                                                    text of the printing and
-                                                    typesetting industry.
-                                                </DialogDescription>
-                                            </DialogHeader>
-
-                                            <div className='space-y-4 py-2'>
-                                                <div className='space-y-2'>
-                                                    <Label htmlFor='edit-date'>
-                                                        วันที่
-                                                    </Label>
-                                                    <Input
-                                                        id='edit-date'
-                                                        type='date'
-                                                    />
-                                                </div>
-                                                <div className='space-y-2'>
-                                                    <Label htmlFor='edit-time'>
-                                                        เวลา
-                                                    </Label>
-                                                    <Input
-                                                        id='edit-time'
-                                                        type='time'
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <DialogFooter className='mt-4'>
-                                                <DialogClose asChild>
-                                                    <Button variant='outline'>
-                                                        ยกเลิก
-                                                    </Button>
-                                                </DialogClose>
-                                                <Button type='submit'>
-                                                    บันทึก
-                                                </Button>
-                                            </DialogFooter>
-                                        </DialogContent>
-                                    </Dialog>
+                                    <EditTableRow user={user} onUpdate={onUpdate} />
 
                                     {/* ปุ่มลบ */}
                                     <Button
