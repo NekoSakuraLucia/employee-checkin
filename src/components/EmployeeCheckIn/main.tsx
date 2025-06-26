@@ -32,8 +32,6 @@ export const EmployeeCheckin = () => {
         }));
     };
 
-    console.log(formData);
-
     const filteredUser = useMemo((): CheckInData[] => {
         const normalizedQuery = searchQuery.toLowerCase().trim();
         return checkInData.filter((user) => {
