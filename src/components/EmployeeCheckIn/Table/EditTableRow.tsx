@@ -23,7 +23,7 @@ import type { CheckInData } from '@/components/EmployeeCheckIn/main';
 // Type
 type EditTableRowProps = {
     user: CheckInData;
-    onUpdate: (id: string, updatedFields: Partial<CheckInData>) => void;
+    onUpdate: (name: string, updatedFields: Partial<CheckInData>) => void;
 };
 
 export const EditTableRow = ({ user, onUpdate }: EditTableRowProps) => {

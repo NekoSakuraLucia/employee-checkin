@@ -25,7 +25,7 @@ import { EditTableRow } from '@/components/EmployeeCheckIn/Table/EditTableRow';
 
 type TableProps = {
     checkInData: CheckInData[];
-    onUpdate: (id: string, updatedFields: Partial<CheckInData>) => void;
+    onUpdate: (name: string, updatedFields: Partial<CheckInData>) => void;
 };
 
 export const TableContainer = ({ checkInData, onUpdate }: TableProps) => {

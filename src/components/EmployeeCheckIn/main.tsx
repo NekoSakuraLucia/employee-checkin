@@ -42,7 +42,7 @@ export const EmployeeCheckin = () => {
         });
     }, [searchQuery, checkInData]);
 
-    const updateUser = (name: string, updatedFields: Partial<CheckInData>) => {
+    const updateUser = (name: string, updatedFields: Partial<CheckInData>): void => {
         setIsCheckIn((prevUsers) =>
             prevUsers.map((user) =>
                 user.name === name ? { ...user, ...updatedFields } : user,
