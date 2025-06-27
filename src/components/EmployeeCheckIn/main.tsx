@@ -6,17 +6,10 @@ import { TableContainer } from '@/components/EmployeeCheckIn/Table/TableContaine
 import { SearchInput } from '@/components/EmployeeCheckIn/Search_Add_Button/SearchInput';
 import { AddCheckIn } from '@/components/EmployeeCheckIn/Search_Add_Button/AddCheckIn';
 
-// Type
-export interface CheckInData {
-    name: string;
-    dateAt: string;
-    timer: string;
-}
-
 export const EmployeeCheckin = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const [checkInData, setIsCheckIn] = useState<CheckInData[]>([]);
-    const [formData, setFormData] = useState<CheckInData>({
+    const [checkInData, setIsCheckIn] = useState<global.CheckInData[]>([]);
+    const [formData, setFormData] = useState<global.CheckInData>({
         name: '',
         dateAt: '',
         timer: '',
@@ -32,7 +25,7 @@ export const EmployeeCheckin = () => {
         }));
     };
 
-    const filteredUser = useMemo((): CheckInData[] => {
+    const filteredUser = useMemo((): global.CheckInData[] => {
         const normalizedQuery = searchQuery.toLowerCase().trim();
         return checkInData.filter((user) => {
             const name = user.name || '';
@@ -40,7 +33,10 @@ export const EmployeeCheckin = () => {
         });
     }, [searchQuery, checkInData]);
 
-    const updateUser = (name: string, updatedFields: Partial<CheckInData>): void => {
+    const updateUser = (
+        name: string,
+        updatedFields: Partial<global.CheckInData>,
+    ): void => {
         setIsCheckIn((prevUsers) =>
             prevUsers.map((user) =>
                 user.name === name ? { ...user, ...updatedFields } : user,

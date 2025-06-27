@@ -18,16 +18,18 @@ import { Button } from '@/components/ui/button';
 
 // Icon
 import { Edit } from 'lucide-react';
-import type { CheckInData } from '@/components/EmployeeCheckIn/main';
 
 // Type
 type EditTableRowProps = {
-    user: CheckInData;
-    onUpdate: (name: string, updatedFields: Partial<CheckInData>) => void;
+    user: global.CheckInData;
+    onUpdate: (
+        name: string,
+        updatedFields: Partial<global.CheckInData>,
+    ) => void;
 };
 
 export const EditTableRow = ({ user, onUpdate }: EditTableRowProps) => {
-    const [editUser, setEditUser] = useState<Partial<CheckInData>>({
+    const [editUser, setEditUser] = useState<Partial<global.CheckInData>>({
         dateAt: user.dateAt,
         timer: user.timer,
     });

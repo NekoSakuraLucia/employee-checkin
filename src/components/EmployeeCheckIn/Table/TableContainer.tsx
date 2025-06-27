@@ -10,22 +10,18 @@ import {
 import { Button } from '@/components/ui/button';
 
 // Icon
-import {
-    User,
-    Calendar,
-    Timer,
-    Settings,
-    Trash,
-    Info,
-} from 'lucide-react';
-import type { CheckInData } from '@/components/EmployeeCheckIn/main';
+import { User, Calendar, Timer, Settings, Trash, Info } from 'lucide-react';
 
 // components
 import { EditTableRow } from '@/components/EmployeeCheckIn/Table/EditTableRow';
 
+// Type
 type TableProps = {
-    checkInData: CheckInData[];
-    onUpdate: (name: string, updatedFields: Partial<CheckInData>) => void;
+    checkInData: global.CheckInData[];
+    onUpdate: (
+        name: string,
+        updatedFields: Partial<global.CheckInData>,
+    ) => void;
 };
 
 export const TableContainer = ({ checkInData, onUpdate }: TableProps) => {
@@ -69,7 +65,10 @@ export const TableContainer = ({ checkInData, onUpdate }: TableProps) => {
                                 <TableCell>{user.timer}</TableCell>
                                 <TableCell className='text-right space-x-2'>
                                     {/* ปุ่มแก้ไข */}
-                                    <EditTableRow user={user} onUpdate={onUpdate} />
+                                    <EditTableRow
+                                        user={user}
+                                        onUpdate={onUpdate}
+                                    />
 
                                     {/* ปุ่มลบ */}
                                     <Button

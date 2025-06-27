@@ -4,13 +4,11 @@ import { Input } from '@/components/ui/input';
 // Icon
 import { Search } from 'lucide-react';
 
-// Types
-import type { CheckInData } from '@/components/EmployeeCheckIn/main';
-
+// Type
 type SearchInputProps = {
     searchQuery: string;
     setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-    checkInData: CheckInData[];
+    checkInData: global.CheckInData[];
 };
 
 export const SearchInput = ({

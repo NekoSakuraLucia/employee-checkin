@@ -16,12 +16,10 @@ import { Button } from '@/components/ui/button';
 // Icon
 import { Plus } from 'lucide-react';
 
-// Types
-import type { CheckInData } from '@/components/EmployeeCheckIn/main';
-
+// Type
 type AddCheckInProps = {
-    formData: CheckInData;
-    setIsCheckIn: React.Dispatch<React.SetStateAction<CheckInData[]>>;
+    formData: global.CheckInData;
+    setIsCheckIn: React.Dispatch<React.SetStateAction<global.CheckInData[]>>;
     handleChangeInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -30,7 +28,7 @@ export const AddCheckIn = ({
     handleChangeInput,
     setIsCheckIn,
 }: AddCheckInProps) => {
-    const handleAdd = (data: CheckInData): void => {
+    const handleAdd = (data: global.CheckInData): void => {
         setIsCheckIn((prev) => [...prev, data]);
     };
 
