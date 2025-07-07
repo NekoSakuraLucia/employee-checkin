@@ -19,17 +19,17 @@ import { Plus } from 'lucide-react';
 // Type
 type AddCheckInProps = {
     formData: global.CheckInData;
-    setIsCheckIn: React.Dispatch<React.SetStateAction<global.CheckInData[]>>;
     handleChangeInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    addUserCheckIn: (data: global.CheckInData) => void;
 };
 
 export const AddCheckIn = ({
     formData,
     handleChangeInput,
-    setIsCheckIn,
+    addUserCheckIn,
 }: AddCheckInProps) => {
     const handleAdd = (data: global.CheckInData): void => {
-        setIsCheckIn((prev) => [...prev, data]);
+        addUserCheckIn(data);
     };
 
     return (

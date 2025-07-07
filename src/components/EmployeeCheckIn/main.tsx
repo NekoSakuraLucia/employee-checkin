@@ -1,14 +1,20 @@
 // react
 import { useMemo, useState } from 'react';
 
+// store
+import { useCheckIn } from '@/store/useCheckIn';
+
 // component
 import { TableContainer } from '@/components/EmployeeCheckIn/Table/TableContainer';
 import { SearchInput } from '@/components/EmployeeCheckIn/Search_Add_Button/SearchInput';
 import { AddCheckIn } from '@/components/EmployeeCheckIn/Search_Add_Button/AddCheckIn';
 
 export const EmployeeCheckin = () => {
+    // Zustand State
+    const { users: checkInData, updateUser, addUserCheckIn } = useCheckIn();
+
+    // React State
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const [checkInData, setIsCheckIn] = useState<global.CheckInData[]>([]);
     const [formData, setFormData] = useState<global.CheckInData>({
         name: '',
         dateAt: '',
@@ -33,17 +39,6 @@ export const EmployeeCheckin = () => {
         });
     }, [searchQuery, checkInData]);
 
-    const updateUser = (
-        name: string,
-        updatedFields: Partial<global.CheckInData>,
-    ): void => {
-        setIsCheckIn((prevUsers) =>
-            prevUsers.map((user) =>
-                user.name === name ? { ...user, ...updatedFields } : user,
-            ),
-        );
-    };
-
     return (
         <div className='p-6 space-y-6 w-full max-w-6xl mx-auto'>
             {/* Search & Add Button */}
@@ -56,7 +51,7 @@ export const EmployeeCheckin = () => {
                 <AddCheckIn
                     formData={formData}
                     handleChangeInput={handleChangeInput}
-                    setIsCheckIn={setIsCheckIn}
+                    addUserCheckIn={addUserCheckIn}
                 />
             </div>
 
